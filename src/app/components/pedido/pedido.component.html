@@ -144,9 +144,43 @@
 </div>
 
 <div class="container mapa" *ngIf="GotoMapa">
-  <!-- ACAAAA PEPEPE PROGRAMA EL MAPAAAA
-  -->
+  <h4>Seleccione un punto en el mapa</h4>
+  <agm-map 
+    [latitude]="lat"
+    [longitude]="lng"
+    [zoom]="zoom"
+    [disableDefaultUI]="false"
+    [zoomControl]="false"
+    (mapClick)="mapClicked($event)">
 
+    <agm-marker 
+        *ngFor="let m of markers; let i = index"
+        (markerClick)="clickedMarker(m.label, i)"
+        [latitude]="m.lat"
+        [longitude]="m.lng"
+        [label]="m.label"
+        [markerDraggable]="m.draggable"
+        (dragEnd)="markerDragEnd(m, $event)">
+        
+      <agm-info-window>
+        <strong>InfoWindow content</strong>
+      </agm-info-window>
+      
+    </agm-marker>
+    
+    <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
+        [radius]="5000"
+        [fillColor]="'red'"
+        [circleDraggable]="true"
+        [editable]="true">
+    </agm-circle>
+
+  </agm-map>
+
+  <!-- ACAAAAAA -->
+  <button type="button" class="btn btn-primary" (click)="destinoMapa()">
+    <span class="fas fa-check">Siguiente</span>
+  </button>
 </div>
 
 <div class="container destino" *ngIf="GotoDestino">
