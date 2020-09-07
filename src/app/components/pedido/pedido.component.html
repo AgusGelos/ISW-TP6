@@ -130,7 +130,7 @@
     <div>
       <div class="row justify-content-center">
 
-        <button type="button" class="btn btn-warning" routerLink="/mapa" (click)="mapa()">
+        <button type="button" class="btn btn-warning" (click)="mapa()">
           <span class="fas fa-undo">Seleccionar en el Mapa</span>
         </button>
         &nbsp;
@@ -141,6 +141,10 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="container mapa" *ngIf="GotoMapa">
+
 </div>
 
 <div class="container destino" *ngIf="GotoDestino">
@@ -245,7 +249,7 @@
                     <input type="radio" class="form-check-input" name="optradio" (click)="habilitar()">Yo te aviso:
                   </label>
                 </div>
-                <div class="form-group col-sm-6" *ngIf="calendar">
+                <div class="form-group col-sm-6" *ngIf="Calendar">
                   <div class="form-group">
                     <input type="date" id="day" name="day">
                   </div>
@@ -269,7 +273,7 @@
                     <option>23</option>
                   </select>
                 </div>
-                <div class="form-group col-sm-6" *ngIf="calendar">
+                <div class="form-group col-sm-6" *ngIf="Calendar">
                   <select class="form-control" name="mm" id="mm">
                     <option disabled>----MM----</option>
                     <option>00</option>
