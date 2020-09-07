@@ -14,7 +14,6 @@ import { MapaComponent } from './components/mapa/mapa.component';
 
 import { AgmCoreModule } from '@agm/core';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,11 +24,11 @@ import { AgmCoreModule } from '@agm/core';
     MapaComponent,
   ],
   imports: [
-    //cosas del mapa
+    // cosas del mapa
     AgmCoreModule.forRoot({
       // please get your own API key here:
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
-      apiKey: 'AIzaSyBN3hl8CILMQex6Sv2xo0rxrhetOd1Zcs8'
+      apiKey: 'AIzaSyBN3hl8CILMQex6Sv2xo0rxrhetOd1Zcs8',
     }),
     //
     ReactiveFormsModule,
@@ -39,10 +38,10 @@ import { AgmCoreModule } from '@agm/core';
       { path: '', redirectTo: '/inicio', pathMatch: 'full' },
       { path: 'inicio', component: InicioComponent },
       { path: 'spedido', component: PedidoComponent },
-      { path: 'mapa', component: MapaComponent }
+      { path: 'mapa', component: MapaComponent },
     ]),
   ],
   providers: [],
-  bootstrap: [AppComponent , MapaComponent],
+  bootstrap: [AppComponent, MapaComponent],
 })
 export class AppModule {}

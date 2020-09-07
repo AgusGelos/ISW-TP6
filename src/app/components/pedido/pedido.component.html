@@ -101,7 +101,7 @@
             </div>
           </div>
           <div class="form-group col-sm-8">
-            <textarea class="form-control" rows="5" id="comment" placeholder="Referencias" formControlName="RefOrigen"
+            <textarea class="form-control" rows="8" id="comment" placeholder="Referencias" formControlName="RefOrigen"
               [ngClass]="{'is-invalid': (FormOrigen.controls.RefOrigen.touched || ListoOrigen)  
               && FormOrigen.controls.RefOrigen.errors}"></textarea>
             <span class="text-danger" *ngIf="(FormOrigen.controls.RefOrigen.touched || ListoOrigen) 
@@ -130,12 +130,12 @@
     <div>
       <div class="row justify-content-center">
 
-        <button type="button" class="btn btn-warning" (click)="mapa()">
-          <span class="fas fa-undo">Seleccionar en el Mapa</span>
+        <button type="button" class="btn btn-warning col-sm-4" (click)="mapa()">
+          Seleccionar en el Mapa
         </button>
         &nbsp;
-        <button type="button" class="btn btn-primary" (click)="destino()">
-          <span class="fas fa-check">Siguiente</span>
+        <button type="button" class="btn btn-primary col-sm-4" (click)="destino()">
+          Siguiente
         </button>
 
       </div>
@@ -145,42 +145,36 @@
 
 <div class="container mapa" *ngIf="GotoMapa">
   <h4>Seleccione un punto en el mapa</h4>
-  <agm-map 
-    [latitude]="lat"
-    [longitude]="lng"
-    [zoom]="zoom"
-    [disableDefaultUI]="false"
-    [zoomControl]="false"
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false"
     (mapClick)="mapClicked($event)">
 
-    <agm-marker 
-        *ngFor="let m of markers; let i = index"
-        (markerClick)="clickedMarker(m.label, i)"
-        [latitude]="m.lat"
-        [longitude]="m.lng"
-        [label]="m.label"
-        [markerDraggable]="m.draggable"
-        (dragEnd)="markerDragEnd(m, $event)">
-        
-      <agm-info-window>
-        <strong>InfoWindow content</strong>
-      </agm-info-window>
-      
+    <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat"
+      [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">
+
     </agm-marker>
-    
-    <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
-        [radius]="5000"
-        [fillColor]="'red'"
-        [circleDraggable]="true"
-        [editable]="true">
+
+    <agm-circle [latitude]="lat + 0.3" [longitude]="lng" [radius]="5000" [fillColor]="'red'" [circleDraggable]="true"
+      [editable]="true">
     </agm-circle>
 
   </agm-map>
+  <br>
 
-  <!-- ACAAAAAA -->
-  <button type="button" class="btn btn-primary" (click)="destinoMapa()">
-    <span class="fas fa-check">Siguiente</span>
-  </button>
+  <div class="row justify-content-center">
+
+    <button type="button" class="btn btn-warning col-sm-3" (click)="volverOrigenMapa()">
+      Anterior
+    </button>
+
+    <button type="button" class="btn btn-primary col-sm-3" (click)="destinoMapa()">
+      Siguiente
+    </button>
+
+  </div>
+
+
+
+
 </div>
 
 <div class="container destino" *ngIf="GotoDestino">
@@ -333,11 +327,11 @@
       </div>
       <div class="row justify-content-center">
         <button type="button" class="btn btn-warning col-sm-3" (click)="volverOrigen()">
-          <span class="fas fa-undo">Anterior</span>
+          Anterior
         </button>
         &nbsp;
         <button type="button" class="btn btn-primary col-sm-3" (click)="formaPago()">
-          <span class="fas fa-check"></span> Siguiente
+          Siguiente
         </button>
       </div>
     </div>
@@ -443,7 +437,7 @@
 
     <div class="row justify-content-center">
       <button type="button" class="btn btn-warning col-sm-3" (click)="volverDestino()">
-        <span class="fas fa-undo">Anterior</span>
+        Anterior
       </button>
       &nbsp;
       <button type="button" class="btn btn-primary col-sm-3" (click)="submit()" data-toggle="modal"

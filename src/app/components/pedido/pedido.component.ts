@@ -2,16 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
-
 @Component({
   selector: 'app-pedido',
   templateUrl: './pedido.component.html',
   styleUrls: ['./pedido.component.css'],
 })
-
-
 export class PedidoComponent implements OnInit {
-  //-----------------------Origen
+  // -----------------------Origen
 
   ListoOrigen: boolean;
   FormOrigen: FormGroup;
@@ -21,13 +18,13 @@ export class PedidoComponent implements OnInit {
   MontoOrigen: number;
   Subido: boolean;
 
-  //---------------------------Destino
+  // ---------------------------Destino
   Calendar: boolean;
   FormDestino: FormGroup;
   ListoDestino: boolean;
   PasarFP: boolean;
 
-  //--------------------------- Pago
+  // --------------------------- Pago
   Tarjeta: boolean;
   Efectivo: boolean;
   FormEfectivo: FormGroup;
@@ -36,21 +33,19 @@ export class PedidoComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder) {}
 
-
-  //----------------------MAPA
+  // ----------------------MAPA
 
   // google maps zoom level
   zoom: number = 16;
-  
+
   // initial center position for the map
   lat: number = -31.4286287;
   lng: number = -64.1848189;
-  
 
   clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+    console.log(`clicked the marker: ${label || index}`);
   }
-  
+
   // mapClicked($event: MouseEvent) {
   //   this.markers.push({
   //     lat: $event.coords.lat,
@@ -58,24 +53,22 @@ export class PedidoComponent implements OnInit {
   //     draggable: true
   //   });
   // }
-  
+
   markerDragEnd(m: marker, $event: MouseEvent) {
     console.log('dragEnd', m, $event);
   }
-  
+
   markers: marker[] = [
-	  {
-		  lat: -31.4286287,
-		  lng: -64.1848189,
-		  label: 'A',
-		  draggable: true
-	  },
-  ]
+    {
+      lat: -31.4286287,
+      lng: -64.1848189,
+      label: 'A',
+      draggable: true,
+    },
+  ];
 
   ngOnInit() {
-
-    
-    //--------------------------------------------- Origen
+    // -------------------------------------------- Origen
     this.ListoOrigen = false;
     this.GotoDestino = false;
     this.GotoMapa = false;
@@ -277,17 +270,25 @@ export class PedidoComponent implements OnInit {
       }
     }
   }
+  volverOrigenMapa() {
+    this.GotoMapa = false;
+  }
 
   volverDestino() {
     this.PasarFP = false;
+    this.GotoDestino = true;
+  }
+
+  destinoMapa() {
+    this.GotoMapa = false;
     this.GotoDestino = true;
   }
 }
 
 // just an interface for type safety.
 interface marker {
-	lat: number;
-	lng: number;
-	label?: string;
-	draggable: boolean;
+  lat: number;
+  lng: number;
+  label?: string;
+  draggable: boolean;
 }
