@@ -4,7 +4,7 @@
       <fieldset>
         <div class="row">
           <div class="form-group col-sm-12">
-            <label for="text">Que buscar:</label>
+            <h3><label for="text">Que buscar:</label></h3>
             <input type="text" class="form-control" placeholder="Que desea:" formControlName="QueOrigen" [ngClass]="{'is-invalid': (FormOrigen.controls.QueOrigen.touched || ListoOrigen)  
               && FormOrigen.controls.QueOrigen.errors}" />
             <span class="text-danger" *ngIf="(FormOrigen.controls.QueOrigen.touched || ListoOrigen || Mapa) 
@@ -114,15 +114,8 @@
     </form>
     <div class="row">
       <div class="col-sm-12">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroupFileAddon01">Mostranos una foto</span>
-          </div>
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-            <label class="custom-file-label" for="inputGroupFile01">Foto del producto</label>
-          </div>
-        </div>
+        <h5>Mostranos una foto:</h5>
+        <input id="foto" type="file" accept=".jpg" class="form-control-file border" size="1">
       </div>
     </div>
     <br>
@@ -144,7 +137,7 @@
 </div>
 
 <div class="container mapa" *ngIf="GotoMapa">
-  <h4>Seleccione un punto en el mapa</h4>
+  <h3>Seleccione un punto en el mapa</h3>
   <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false"
     (mapClick)="mapClicked($event)">
 
@@ -180,7 +173,7 @@
 <div class="container destino" *ngIf="GotoDestino">
   <div class="container">
     <div class="Destino">
-      <label for="text">A donde te lo llevamos:</label>
+      <h3><label for="text">A donde te lo llevamos:</label></h3>
       <form [formGroup]="FormDestino">
         <fieldset>
           <div class="row">
@@ -402,12 +395,13 @@
             </span>
             <span class="text-danger" *ngIf="(FormTarjeta.controls.Nro.touched || Submitted) 
                          &&   FormTarjeta.controls.Nro.errors?.pattern">
-              Formato xxxx-xxxx-xxxx-xxxx, no olvides lo guiones.
+              Formato xxxx-xxxx-xxxx-xxxx, no olvides lo guiones. No aceptamos Masterd-Card.
             </span>
           </div>
           <div class="form-group">
             <label for="text">Fecha de vencimiento:</label>
-            <input type="text" placeholder="xx-xxxx" class="form-control" formControlName="Fecha" [ngClass]="{'is-invalid': (FormTarjeta.controls.Fecha.touched || Submitted)  
+            <input type="text" placeholder="xx-xxxx" class="form-control" id="fechaVenc" formControlName="Fecha"
+              [ngClass]="{'is-invalid': (FormTarjeta.controls.Fecha.touched || Submitted)  
               && FormTarjeta.controls.Fecha.errors}" />
             <span class="text-danger" *ngIf="(FormTarjeta.controls.Fecha.touched || Submitted) 
                           && FormTarjeta.controls.Fecha.errors?.required">

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
+import { parse } from 'path';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'app-pedido',
@@ -142,7 +144,7 @@ export class PedidoComponent implements OnInit {
         null,
         [
           Validators.required,
-          Validators.pattern('[0-9]{4}[-][0-9]{4}[-][0-9]{4}[-][0-9]{4}'),
+          Validators.pattern('[4]{1}[0-9]{3}[-][0-9]{4}[-][0-9]{4}[-][0-9]{4}'),
         ],
       ],
       Fecha: [
@@ -159,6 +161,9 @@ export class PedidoComponent implements OnInit {
   }
 
   destino() {
+    if (!this.checkImg()) {
+      return;
+    }
     if (this.FormOrigen.invalid) {
       this.ListoOrigen = true;
       return;
@@ -176,6 +181,9 @@ export class PedidoComponent implements OnInit {
   }
 
   mapa() {
+    if (!this.checkImg()) {
+      return;
+    }
     if (this.FormOrigen.controls.QueOrigen.invalid) {
       this.Mapa = true;
       return;
@@ -202,12 +210,40 @@ export class PedidoComponent implements OnInit {
     this.Efectivo = false;
   }
 
+  checkImg() {
+    let foto = document.getElementById('foto') as HTMLInputElement;
+
+    if (foto.files[0].size > 500000) {
+      alert('El archivo no debe superar los 5MB');
+      return false;
+    }
+    return true;
+  }
+
   submit() {
     this.Submitted = true;
     if (this.Tarjeta) {
       if (this.FormTarjeta.invalid) {
         return;
       } else {
+        let fecha = new Date();
+        let mes = fecha.getMonth() + 1;
+        let anio = fecha.getFullYear();
+
+        let mesTarjeta = (document.getElementById(
+          'fechaVenc'
+        ) as HTMLInputElement).value
+          .toString()
+          .split('-');
+
+        if (
+          parseInt(mesTarjeta[1]) < anio ||
+          (parseInt(mesTarjeta[1]) == anio && parseInt(mesTarjeta[0]) <= mes)
+        ) {
+          this.FormTarjeta.controls.Fecha.reset();
+          return;
+        }
+
         this.Subido = true;
         console.log('Subido');
       }
