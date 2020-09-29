@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
-import { parse } from 'path';
+
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
@@ -213,6 +213,10 @@ export class PedidoComponent implements OnInit {
   checkImg() {
     let foto = document.getElementById('foto') as HTMLInputElement;
 
+    if (foto.files[0] == undefined) {
+      return true;
+    }
+
     if (foto.files[0].size > 500000) {
       alert('El archivo no debe superar los 5MB');
       return false;
@@ -259,6 +263,7 @@ export class PedidoComponent implements OnInit {
           )
         ) {
           this.FormEfectivo.reset();
+          alert('Monto Incorrecto');
           console.log('Monto incorrecto');
           return;
         }
@@ -296,12 +301,14 @@ export class PedidoComponent implements OnInit {
         parseInt(diaPedido[2]) >= hoy
       ) {
         if (parseInt(diaPedido[2]) == hoy && parseInt(horaPedido) < hora + 1) {
+          alert('Fecha Incorrecta');
           console.log('Fecha Incorrecta.');
         } else {
           this.PasarFP = true;
           this.GotoDestino = false;
         }
       } else {
+        alert('Fecha Incorrecta');
         console.log('Fecha Incorrecta.');
       }
     }
